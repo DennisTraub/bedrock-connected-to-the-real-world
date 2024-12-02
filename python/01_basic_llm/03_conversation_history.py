@@ -2,7 +2,10 @@ import boto3
 from datetime import date
 
 client = boto3.client("bedrock-runtime", region_name="us-east-1")
-system_prompt = f"Today's date is {date.today()}. You are a travel assistant."
+
+system = [{
+    "text": f"Today's date is {date.today()}. You are a travel assistant."
+}]
 
 messages = [
     {
@@ -11,7 +14,7 @@ messages = [
     },
     {
       "role": "assistant", 
-      "content": [{"text": "What type of activities do you like?"}]
+      "content": [{"text": "Let's see... What type of activities do you like?"}]
     },
     {
       "role": "user", 
@@ -21,7 +24,7 @@ messages = [
 
 response = client.converse(
     modelId="anthropic.claude-3-haiku-20240307-v1:0",
-    system=[{"text": system_prompt}],
+    system=system,
     messages=messages
 )
 
