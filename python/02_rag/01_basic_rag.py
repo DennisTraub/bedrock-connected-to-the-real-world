@@ -1,32 +1,40 @@
 import boto3
 import json
+import os
+
 from datetime import date
 
-def load_context(file_path):
+
+def load_context(file_name):
+    script_path = os.path.abspath(__file__)
+    file_path = os.path.join(os.path.dirname(script_path), file_name)
+
     with open(file_path, 'r') as file:
         return json.load(file)
 
 client = boto3.client("bedrock-runtime", region_name="us-east-1")
+
 system_prompt = [{
     "text": f"""
     Today's date is {date.today()}. You are a travel assistant.
-    You will be given a context about travel destinations and activities.
-    Answer the user's questions based on the context.
-    You MUST follow the rules below:
-    - If the context doesn't contain the answer, say that you don't know the answer.
-    - If the question is not related to travel, say that you don't know the answer.
+    You will be given JSON data embedded in <context> tags about travel destinations and activities.
+    With that information, answer the user's question, embedded in <question> tags.
     """
 }]
 
-context_data = load_context('../data/travel_info.json')
+context_data = load_context('files/travel_info.json')
 
 context = json.dumps(context_data)
 
 prompt = "Would it be a good time to visit Las Vegas this month?"
 
 augmented_prompt = f"""
-<CONTEXT>{context}</CONTEXT>
-<USER_QUESTION>{prompt}</USER_QUESTION>
+<context>
+    {context}
+</context>
+<question>
+    {prompt}
+</question>
 """
 
 messages = [{

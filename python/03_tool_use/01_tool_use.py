@@ -1,7 +1,7 @@
 import boto3
-import json
-from datetime import date
-from pprint import pprint
+
+from time import strftime
+
 
 def get_weather_tool_spec():
     """
@@ -37,10 +37,59 @@ def weather_tool(city):
 
     return weather_data.get(city.lower().replace(" ", "_"))
 
+def process_response(follow_up_response, depth=0, max_depth=3):
+    # Check recursion depth first
+    if depth >= max_depth:
+        print(f"Maximum recursion depth ({max_depth}) reached")
+        return
+
+    # Append the model's response to the conversation
+    messages.append(follow_up_response["output"]["message"])
+
+    # Check each individual content block of the response
+    for content_block in follow_up_response["output"]["message"]["content"]:
+
+        # Display text responses in the console
+        if "text" in content_block:
+            response_text = follow_up_response["output"]["message"]["content"][0]["text"]
+            print(f"\n{response_text}")
+
+        # Process tool use requests
+        elif "toolUse" in content_block:
+            tool_use_request = content_block["toolUse"]
+            if tool_use_request["name"] == "get_current_weather":
+                tool_use_id = tool_use_request["toolUseId"]
+                city = tool_use_request["input"]["city"]
+                weather_info = weather_tool(city)
+
+                # Append the tool's response to the conversation
+                messages.append({
+                    "role": "user",
+                    "content": [
+                        {"toolResult": {
+                            "toolUseId": tool_use_id,
+                            "content": [{"json": weather_info}],
+                        }}
+                    ]
+                })
+
+                # Send the tool's response back to the model
+                follow_up_response = client.converse(
+                    modelId="anthropic.claude-3-haiku-20240307-v1:0",
+                    toolConfig=tool_config,
+                    system=system_prompt,
+                    messages=messages
+                )
+
+                process_response(follow_up_response, depth + 1, max_depth)
+
 client = boto3.client("bedrock-runtime", region_name="us-east-1")
+
+date_as_text = strftime("%A %d %B %Y")
+
 system_prompt = [{
     "text": f"""
-    Today's date is {date.today()}. You are a travel assistant.
+    Today's date is {date_as_text}. You are a travel assistant.
     You also have access to a tool get_current_weather.
     With this in mind, answer the user's questions.
     You MUST follow the rules below:
@@ -68,35 +117,4 @@ response = client.converse(
     messages=messages
 )
 
-# Append the model's response to the conversation
-messages.append( response["output"]["message"])
-
-for content_block in response["output"]["message"]["content"]:
-    if "toolUse" in content_block:
-        tool_use_request = content_block["toolUse"]
-        if tool_use_request["name"] == "get_current_weather":
-            toolUseId = tool_use_request["toolUseId"]
-            city = tool_use_request["input"]["city"]
-            weather_info = weather_tool(city)
-
-            # Append the tool's response to the conversation
-            messages.append({
-                "role": "user", 
-                "content": [
-                    {"toolResult": {
-                        "toolUseId": toolUseId,
-                        "content": [{"json": weather_info}],
-                    }}
-                ]
-            })
-            
-            # Send the tool's response back to the model
-            response = client.converse(
-                modelId="anthropic.claude-3-haiku-20240307-v1:0",
-                toolConfig=tool_config,
-                system=system_prompt,
-                messages=messages
-            )
-
-response_text = response["output"]["message"]["content"][0]["text"]
-print(response_text)
+process_response(response)
