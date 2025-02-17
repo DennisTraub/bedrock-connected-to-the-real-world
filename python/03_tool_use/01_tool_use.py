@@ -1,6 +1,6 @@
 import boto3
 
-from time import strftime
+from datetime import date
 
 
 def get_weather_tool_spec():
@@ -31,6 +31,7 @@ def get_weather_tool_spec():
 
 def weather_tool(city):
     weather_data = {
+        "berlin": {"temperature": "-1°C/30°F", "condition": "Clear skies"},
         "new_york": {"temperature": 40, "condition": "Partly cloudy"},
         "las_vegas": {"temperature": 71, "condition": "Sunny"}
     }
@@ -75,33 +76,38 @@ def process_response(follow_up_response, depth=0, max_depth=3):
 
                 # Send the tool's response back to the model
                 follow_up_response = client.converse(
-                    modelId="anthropic.claude-3-haiku-20240307-v1:0",
+                    modelId=model_id,
                     toolConfig=tool_config,
-                    system=system_prompt,
+                    system=system,
                     messages=messages
                 )
 
                 process_response(follow_up_response, depth + 1, max_depth)
 
+
+
 client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
-date_as_text = strftime("%A %d %B %Y")
+model_id = "amazon.nova-micro-v1:0"
 
-system_prompt = [{
-    "text": f"""
-    Today's date is {date_as_text}. You are a travel assistant.
-    You also have access to a tool get_current_weather.
-    With this in mind, answer the user's questions.
-    You MUST follow the rules below:
-    - ALWAYS use the get_current_weather to get current weather information.
-    - Don't rely on anything else for weather information.
-    - Don't make up weather information.
-    - If the tool doesn't return the weather, say that you don't know the answer.
-    - If the question is not related to travel, say that you don't know the answer.
-    """
+# Get today's date for context, e.g. "Tuesday 03 December 2024"
+today = date.today().strftime("%A %d %B %Y")
+
+# Define a system prompt with strict rules about tool usage
+system = [{
+    "text": f"Today's date is {today}. You are a travel assistant."
+            f"Your are a friendly travel assistant. "
+            f"Keep your responses short, with a maximum of three sentences."
+            f"You have access to the tool 'get_weather'."
+            f"You MUST follow the rules below:"
+            f"- ALWAYS use the get_weather to get weather information."
+            f"- NEVER rely on anything else for weather information."
+            f"- NEVER make up weather information."
+            f"- If the tool doesn't return the weather, say that you don't know the answer."
+            f"- If the question is not related to travel, say that you don't know the answer."
 }]
 
-prompt = "Would it be a good time to visit Las Vegas this month?"
+prompt = "Would it be a good time to visit Berlin this month?"
 
 messages = [{
     "role": "user", 
@@ -111,9 +117,9 @@ messages = [{
 tool_config = {"tools": [get_weather_tool_spec()]}
 
 response = client.converse(
-    modelId="anthropic.claude-3-haiku-20240307-v1:0",
+    modelId=model_id,
     toolConfig=tool_config,
-    system=system_prompt,
+    system=system,
     messages=messages
 )
 

@@ -1,13 +1,12 @@
-
 import boto3
 import chromadb
+import os
 
 from datetime import date
-from time import strftime
 from chromadb.utils import embedding_functions
 
 def get_context_from_vectordb(query):
-    # Initialize ChromaDB with persistence
+    # Create a ChromaDB client
     chroma_client = chromadb.PersistentClient(path="./vector_db")
 
     # Define embedding function (default is OpenAI's text-embedding-ada-002)
@@ -33,42 +32,43 @@ def get_context_from_vectordb(query):
 # Initialize Bedrock client
 client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
-date = date.today()
-# date_as_text = strftime("%A %d %B %Y") // e.g. "Tuesday 03 December 2024"
+# Get today's date for context, e.g. "Tuesday 03 December 2024"
+today = date.today().strftime("%A %d %B %Y")
 
-system_prompt = f"""
-    Today's date is {date}. You are a travel assistant.
-    You will be given information in <context> tags about travel destinations and activities.
-    With that information, answer the user's question, embedded in <question> tags.
-    """
+system = (
+    f"Today's date is {today}. You are a travel assistant."
+    f"Your are a friendly travel assistant. "
+    f"Keep your responses short, with a maximum of three sentences."
+    f"You will be given information about travel destinations and activities embedded in <data> tags."
+    f"Based on that information, answer the user's question, which is embedded in <question> tags."
+)
 
-prompt = "Would it be a good time to visit Las Vegas this month?"
+prompt = "Would it be a good time to visit Berlin this month?"
 
 # Get relevant context from the vector DB based on the system prompt and user question
-context = get_context_from_vectordb(f"{system_prompt}\n{prompt}")
+context = get_context_from_vectordb(f"{system}\n{prompt}")
 
-augmented_prompt = f"""
-<context>
-    {context}
-</context>
-<question>
-    {prompt}
-</question>
-"""
+augmented_prompt = (
+    f"<context>"
+    f"{context}"
+    f"</context>"
+    f"<question>"
+    f"{prompt}"
+    f"</question>"
+)
 
-messages = [{
-    "role": "user",
-    "content": [{"text": augmented_prompt}]
-}]
+messages = [{"role": "user", "content": [{"text": augmented_prompt}]}]
 
 response = client.converse(
-    modelId="anthropic.claude-3-haiku-20240307-v1:0",
-    system=[{"text": system_prompt}],
+    modelId="amazon.nova-micro-v1:0",
+    system=[{"text": system}],
     messages=messages
 )
 
 response_text = response["output"]["message"]["content"][0]["text"]
 print(response_text)
+
+
 
 # Helper function to initialize the vector DB with data
 def initialize_vector_db():
@@ -118,7 +118,45 @@ def initialize_vector_db():
         "Las Vegas - November: High 19°C/67°F, Low 8°C/47°F, Precipitation 8mm/0.3in. Cool and clear, occasional light rain",
         "Las Vegas - December: High 14°C/58°F, Low 4°C/39°F, Precipitation 13mm/0.5in. Cool winter weather, occasional rain",
         "Las Vegas - Events: Cirque du Soleil, schedule: Wednesday to Sunday",
-        "Las Vegas - Events: Red Rock Canyon Tours, schedule: Daily"
+        "Las Vegas - Events: Red Rock Canyon Tours, schedule: Daily",
+        "Berlin - January: High 3°C/37°F, Low -1°C/30°F, Precipitation 42mm/1.7in. Cold winter weather with occasional snow",
+        "Berlin - February: High 4°C/39°F, Low -1°C/30°F, Precipitation 33mm/1.3in. Cold with mix of snow and rain",
+        "Berlin - March: High 9°C/48°F, Low 2°C/36°F, Precipitation 37mm/1.5in. Gradually warming temperatures, occasional rain",
+        "Berlin - April: High 14°C/57°F, Low 5°C/41°F, Precipitation 37mm/1.5in. Mild spring weather with scattered showers",
+        "Berlin - May: High 19°C/66°F, Low 9°C/48°F, Precipitation 54mm/2.1in. Pleasant spring temperatures, moderate rainfall",
+        "Berlin - June: High 22°C/72°F, Low 13°C/55°F, Precipitation 71mm/2.8in. Warm with occasional thunderstorms",
+        "Berlin - July: High 25°C/77°F, Low 15°C/59°F, Precipitation 55mm/2.2in. Warmest month, mix of sun and rain",
+        "Berlin - August: High 24°C/75°F, Low 14°C/57°F, Precipitation 58mm/2.3in. Warm summer weather continues, scattered showers",
+        "Berlin - September: High 19°C/66°F, Low 11°C/52°F, Precipitation 45mm/1.8in. Pleasant early autumn temperatures",
+        "Berlin - October: High 14°C/57°F, Low 7°C/45°F, Precipitation 37mm/1.5in. Cooling temperatures, moderate rainfall",
+        "Berlin - November: High 8°C/46°F, Low 3°C/37°F, Precipitation 44mm/1.7in. Cool with increasing cloud cover",
+        "Berlin - December: High 4°C/39°F, Low 0°C/32°F, Precipitation 55mm/2.2in. Cold winter weather with mix of rain and snow",
+        "Berlin - Events: Berlinale, schedule: February",
+        "Berlin - Events: Museum Island Tours, schedule: Daily",
+        "Berlin - Events: Berlin Art Week, schedule: September",
+        "Berlin - Attractions: Brandenburg Gate",
+        "Berlin - Attractions: East Side Gallery",
+        "Berlin - Attractions: Museum Island",
+        "Berlin - Attractions: Reichstag Building",
+        "Barcelona - January: High 14°C/57°F, Low 5°C/41°F, Precipitation 41mm/1.6in. Mild winter temperatures, occasional rain",
+        "Barcelona - February: High 15°C/59°F, Low 6°C/43°F, Precipitation 29mm/1.1in. Mild days, cool nights, lower rainfall",
+        "Barcelona - March: High 17°C/63°F, Low 8°C/46°F, Precipitation 40mm/1.6in. Spring begins, moderate temperatures",
+        "Barcelona - April: High 19°C/66°F, Low 10°C/50°F, Precipitation 48mm/1.9in. Pleasant spring weather, occasional showers",
+        "Barcelona - May: High 22°C/72°F, Low 13°C/55°F, Precipitation 47mm/1.9in. Warm days, comfortable evenings",
+        "Barcelona - June: High 26°C/79°F, Low 17°C/63°F, Precipitation 29mm/1.1in. Warm and sunny, low rainfall",
+        "Barcelona - July: High 29°C/84°F, Low 20°C/68°F, Precipitation 22mm/0.9in. Hot and dry, perfect beach weather",
+        "Barcelona - August: High 29°C/84°F, Low 20°C/68°F, Precipitation 62mm/2.4in. Hot with occasional thunderstorms",
+        "Barcelona - September: High 26°C/79°F, Low 17°C/63°F, Precipitation 81mm/3.2in. Warm, highest rainfall of the year",
+        "Barcelona - October: High 22°C/72°F, Low 14°C/57°F, Precipitation 91mm/3.6in. Mild temperatures, frequent rainfall",
+        "Barcelona - November: High 17°C/63°F, Low 9°C/48°F, Precipitation 58mm/2.3in. Cooling temperatures, moderate rainfall",
+        "Barcelona - December: High 14°C/57°F, Low 6°C/43°F, Precipitation 40mm/1.6in. Mild winter weather, occasional rain",
+        "Barcelona - Events: La Mercè Festival, schedule: September",
+        "Barcelona - Events: Primavera Sound, schedule: Late May/Early June",
+        "Barcelona - Events: Sagrada Familia Tours, schedule: Daily",
+        "Barcelona - Attractions: Sagrada Familia",
+        "Barcelona - Attractions: Park Güell",
+        "Barcelona - Attractions: Casa Batlló",
+        "Barcelona - Attractions: La Rambla"
     ]
 
     ids = [f"doc_{i}" for i in range(len(documents))]
@@ -132,6 +170,5 @@ def initialize_vector_db():
     )
 
 if __name__ == "__main__":
-    # Uncomment to initialize the vector DB with sample data
-    # initialize_vector_db()
-    pass
+    if not os.path.exists("./vector_db"):
+        initialize_vector_db()

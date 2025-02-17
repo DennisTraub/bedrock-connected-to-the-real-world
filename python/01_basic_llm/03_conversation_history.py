@@ -3,14 +3,20 @@ from datetime import date
 
 client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
+# Get today's date for context, e.g. "Tuesday 03 December 2024"
+today = date.today().strftime("%A %d %B %Y")
+
+# Define the system prompt
 system = [{
-    "text": f"Today's date is {date.today()}. You are a travel assistant."
+    "text": f"Today's date is {today}. "
+            f"Your are a friendly travel assistant. "
+            f"Keep your responses short, with a maximum of three sentences."
 }]
 
 messages = [
     {
       "role": "user",
-      "content": [{"text": "Would it be a good time to visit Las Vegas this month?"}]
+      "content": [{"text": "Would it be a good time to visit Berlin this month?"}]
     },
     {
       "role": "assistant", 
@@ -23,7 +29,7 @@ messages = [
 ]
 
 response = client.converse(
-    modelId="anthropic.claude-3-haiku-20240307-v1:0",
+    modelId="amazon.nova-micro-v1:0",
     system=system,
     messages=messages
 )

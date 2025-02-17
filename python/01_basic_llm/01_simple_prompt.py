@@ -2,7 +2,7 @@ import boto3
 
 client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
-prompt = "Would it be a good time to visit Las Vegas this month?"
+prompt = "Would it be a good time to visit Berlin this month?"
 
 messages = [{
     "role": "user",
@@ -10,7 +10,7 @@ messages = [{
 }]
 
 response = client.converse(
-    modelId="anthropic.claude-3-haiku-20240307-v1:0",
+    modelId="amazon.nova-micro-v1:0",
     messages=messages
 )
 

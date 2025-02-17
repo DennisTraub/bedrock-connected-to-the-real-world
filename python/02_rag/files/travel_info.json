@@ -1,285 +1,296 @@
 {
-  "new_york": {
+  "barcelona": {
     "events": [
       {
-        "name": "Broadway Shows",
-        "type": "Theater",
-        "schedule": "Various, mostly Tuesday to Sunday"
+        "name": "La Mercè Festival",
+        "type": "Cultural Festival",
+        "schedule": "September"
       },
       {
-        "name": "Central Park Tours",
-        "type": "Outdoor Activity",
+        "name": "Primavera Sound",
+        "type": "Music Festival",
+        "schedule": "Late May/Early June"
+      },
+      {
+        "name": "Sagrada Familia Tours",
+        "type": "Cultural Activity",
         "schedule": "Daily"
-      },
-      {
-        "name": "New York Fashion Week",
-        "type": "Fashion Event",
-        "schedule": "September and February"
       }
     ],
     "weather": {
       "months": {
         "january": {
-          "high_celsius": 4,
-          "high_fahrenheit": 39,
-          "low_celsius": -3,
-          "low_fahrenheit": 27,
-          "precipitation_mm": 86,
-          "precipitation_inches": 3.4,
-          "description": "Cold with snow and rain likely"
+          "high_celsius": 14,
+          "high_fahrenheit": 57,
+          "low_celsius": 5,
+          "low_fahrenheit": 41,
+          "precipitation_mm": 41,
+          "precipitation_inches": 1.6,
+          "description": "Mild winter temperatures, occasional rain"
         },
         "february": {
-          "high_celsius": 6,
-          "high_fahrenheit": 43,
-          "low_celsius": -2,
-          "low_fahrenheit": 28,
-          "precipitation_mm": 78,
-          "precipitation_inches": 3.1,
-          "description": "Cold winter weather continues, mix of snow and rain"
+          "high_celsius": 15,
+          "high_fahrenheit": 59,
+          "low_celsius": 6,
+          "low_fahrenheit": 43,
+          "precipitation_mm": 29,
+          "precipitation_inches": 1.1,
+          "description": "Mild days, cool nights, lower rainfall"
         },
         "march": {
-          "high_celsius": 10,
-          "high_fahrenheit": 50,
-          "low_celsius": 2,
-          "low_fahrenheit": 36,
-          "precipitation_mm": 101,
-          "precipitation_inches": 4.0,
-          "description": "Milder temperatures, frequent rain showers"
+          "high_celsius": 17,
+          "high_fahrenheit": 63,
+          "low_celsius": 8,
+          "low_fahrenheit": 46,
+          "precipitation_mm": 40,
+          "precipitation_inches": 1.6,
+          "description": "Spring begins, moderate temperatures"
         },
         "april": {
-          "high_celsius": 16,
-          "high_fahrenheit": 61,
-          "low_celsius": 7,
-          "low_fahrenheit": 45,
-          "precipitation_mm": 106,
-          "precipitation_inches": 4.2,
-          "description": "Spring weather with regular rainfall"
+          "high_celsius": 19,
+          "high_fahrenheit": 66,
+          "low_celsius": 10,
+          "low_fahrenheit": 50,
+          "precipitation_mm": 48,
+          "precipitation_inches": 1.9,
+          "description": "Pleasant spring weather, occasional showers"
         },
         "may": {
           "high_celsius": 22,
           "high_fahrenheit": 72,
           "low_celsius": 13,
           "low_fahrenheit": 55,
-          "precipitation_mm": 111,
-          "precipitation_inches": 4.4,
-          "description": "Warm spring temperatures, occasional thunderstorms"
+          "precipitation_mm": 47,
+          "precipitation_inches": 1.9,
+          "description": "Warm days, comfortable evenings"
         },
         "june": {
-          "high_celsius": 27,
-          "high_fahrenheit": 81,
-          "low_celsius": 18,
-          "low_fahrenheit": 64,
-          "precipitation_mm": 104,
-          "precipitation_inches": 4.1,
-          "description": "Warm and humid, afternoon thunderstorms possible"
+          "high_celsius": 26,
+          "high_fahrenheit": 79,
+          "low_celsius": 17,
+          "low_fahrenheit": 63,
+          "precipitation_mm": 29,
+          "precipitation_inches": 1.1,
+          "description": "Warm and sunny, low rainfall"
         },
         "july": {
           "high_celsius": 29,
           "high_fahrenheit": 84,
-          "low_celsius": 21,
-          "low_fahrenheit": 70,
-          "precipitation_mm": 116,
-          "precipitation_inches": 4.6,
-          "description": "Hot and humid, frequent thunderstorms"
-        },
-        "august": {
-          "high_celsius": 28,
-          "high_fahrenheit": 82,
           "low_celsius": 20,
           "low_fahrenheit": 68,
-          "precipitation_mm": 111,
-          "precipitation_inches": 4.4,
-          "description": "Hot and humid, thunderstorms common"
+          "precipitation_mm": 22,
+          "precipitation_inches": 0.9,
+          "description": "Hot and dry, perfect beach weather"
+        },
+        "august": {
+          "high_celsius": 29,
+          "high_fahrenheit": 84,
+          "low_celsius": 20,
+          "low_fahrenheit": 68,
+          "precipitation_mm": 62,
+          "precipitation_inches": 2.4,
+          "description": "Hot with occasional thunderstorms"
         },
         "september": {
-          "high_celsius": 24,
-          "high_fahrenheit": 75,
-          "low_celsius": 16,
-          "low_fahrenheit": 61,
-          "precipitation_mm": 109,
-          "precipitation_inches": 4.3,
-          "description": "Warm early fall weather, occasional rain"
+          "high_celsius": 26,
+          "high_fahrenheit": 79,
+          "low_celsius": 17,
+          "low_fahrenheit": 63,
+          "precipitation_mm": 81,
+          "precipitation_inches": 3.2,
+          "description": "Warm, highest rainfall of the year"
         },
         "october": {
-          "high_celsius": 18,
-          "high_fahrenheit": 64,
-          "low_celsius": 10,
-          "low_fahrenheit": 50,
-          "precipitation_mm": 96,
-          "precipitation_inches": 3.8,
-          "description": "Mild fall temperatures, moderate rainfall"
-        },
-        "november": {
-          "high_celsius": 12,
-          "high_fahrenheit": 54,
-          "low_celsius": 5,
-          "low_fahrenheit": 41,
+          "high_celsius": 22,
+          "high_fahrenheit": 72,
+          "low_celsius": 14,
+          "low_fahrenheit": 57,
           "precipitation_mm": 91,
           "precipitation_inches": 3.6,
-          "description": "Cooling temperatures, mix of rain and occasional snow"
+          "description": "Mild temperatures, frequent rainfall"
+        },
+        "november": {
+          "high_celsius": 17,
+          "high_fahrenheit": 63,
+          "low_celsius": 9,
+          "low_fahrenheit": 48,
+          "precipitation_mm": 58,
+          "precipitation_inches": 2.3,
+          "description": "Cooling temperatures, moderate rainfall"
         },
         "december": {
-          "high_celsius": 6,
-          "high_fahrenheit": 43,
-          "low_celsius": 0,
-          "low_fahrenheit": 32,
-          "precipitation_mm": 94,
-          "precipitation_inches": 3.7,
-          "description": "Cold with mix of rain and snow"
+          "high_celsius": 14,
+          "high_fahrenheit": 57,
+          "low_celsius": 6,
+          "low_fahrenheit": 43,
+          "precipitation_mm": 40,
+          "precipitation_inches": 1.6,
+          "description": "Mild winter weather, occasional rain"
         }
       },
       "summary": {
         "hottest_month": "july",
         "coldest_month": "january",
-        "wettest_month": "july",
-        "driest_month": "february",
-        "annual_rainfall_mm": 1203,
-        "annual_rainfall_inches": 47.6,
-        "climate_type": "Humid subtropical (Cfa)",
-        "description": "New York City has a humid subtropical climate with hot summers and cold winters. Precipitation is evenly distributed throughout the year with both rain and snow. The city experiences all four seasons distinctly, with significant temperature variations between seasons."
+        "wettest_month": "october",
+        "driest_month": "july",
+        "annual_rainfall_mm": 588,
+        "annual_rainfall_inches": 23.2,
+        "climate_type": "Mediterranean (Csa)",
+        "description": "Barcelona has a Mediterranean climate with mild winters and warm summers. Rainfall is moderate and most common in autumn. The city enjoys around 2,500 hours of sunshine annually, with hot but not extreme summers and mild winters."
       }
     },
     "attractions": [
-      "Statue of Liberty",
-      "Empire State Building",
-      "Metropolitan Museum of Art",
-      "Times Square"
+      "Sagrada Familia",
+      "Park Güell",
+      "Casa Batlló",
+      "La Rambla"
     ]
   },
-  "las_vegas": {
+  "berlin": {
     "events": [
       {
-        "name": "Cirque du Soleil",
-        "type": "Show",
-        "schedule": "Wednesday to Sunday"
+        "name": "Berlinale",
+        "type": "Film Festival",
+        "schedule": "February"
       },
       {
-        "name": "Red Rock Canyon Tours",
-        "type": "Outdoor Activity",
+        "name": "Museum Island Tours",
+        "type": "Cultural Activity",
         "schedule": "Daily"
+      },
+      {
+        "name": "Berlin Art Week",
+        "type": "Art Festival",
+        "schedule": "September"
       }
     ],
     "weather": {
       "months": {
         "january": {
-          "high_celsius": 14,
-          "high_fahrenheit": 58,
-          "low_celsius": 4,
-          "low_fahrenheit": 39,
-          "precipitation_mm": 13,
-          "precipitation_inches": 0.5,
-          "description": "Cool and mostly clear, occasional rain"
+          "high_celsius": 3,
+          "high_fahrenheit": 37,
+          "low_celsius": -1,
+          "low_fahrenheit": 30,
+          "precipitation_mm": 42,
+          "precipitation_inches": 1.7,
+          "description": "Cold winter weather with occasional snow"
         },
         "february": {
-          "high_celsius": 17,
-          "high_fahrenheit": 63,
-          "low_celsius": 6,
-          "low_fahrenheit": 43,
-          "precipitation_mm": 18,
-          "precipitation_inches": 0.7,
-          "description": "Mild days, cool nights, slightly more rain"
+          "high_celsius": 4,
+          "high_fahrenheit": 39,
+          "low_celsius": -1,
+          "low_fahrenheit": 30,
+          "precipitation_mm": 33,
+          "precipitation_inches": 1.3,
+          "description": "Cold with mix of snow and rain"
         },
         "march": {
-          "high_celsius": 21,
-          "high_fahrenheit": 70,
-          "low_celsius": 9,
-          "low_fahrenheit": 48,
-          "precipitation_mm": 11,
-          "precipitation_inches": 0.4,
-          "description": "Warming up, windy conditions common"
+          "high_celsius": 9,
+          "high_fahrenheit": 48,
+          "low_celsius": 2,
+          "low_fahrenheit": 36,
+          "precipitation_mm": 37,
+          "precipitation_inches": 1.5,
+          "description": "Gradually warming temperatures, occasional rain"
         },
         "april": {
-          "high_celsius": 26,
-          "high_fahrenheit": 78,
-          "low_celsius": 13,
-          "low_fahrenheit": 55,
-          "precipitation_mm": 5,
-          "precipitation_inches": 0.2,
-          "description": "Pleasant temperatures, very low rainfall"
+          "high_celsius": 14,
+          "high_fahrenheit": 57,
+          "low_celsius": 5,
+          "low_fahrenheit": 41,
+          "precipitation_mm": 37,
+          "precipitation_inches": 1.5,
+          "description": "Mild spring weather with scattered showers"
         },
         "may": {
-          "high_celsius": 31,
-          "high_fahrenheit": 88,
-          "low_celsius": 18,
-          "low_fahrenheit": 64,
-          "precipitation_mm": 3,
-          "precipitation_inches": 0.1,
-          "description": "Getting hot, very dry conditions"
+          "high_celsius": 19,
+          "high_fahrenheit": 66,
+          "low_celsius": 9,
+          "low_fahrenheit": 48,
+          "precipitation_mm": 54,
+          "precipitation_inches": 2.1,
+          "description": "Pleasant spring temperatures, moderate rainfall"
         },
         "june": {
-          "high_celsius": 37,
-          "high_fahrenheit": 98,
-          "low_celsius": 23,
-          "low_fahrenheit": 73,
-          "precipitation_mm": 2,
-          "precipitation_inches": 0.08,
-          "description": "Very hot and dry, clear skies"
+          "high_celsius": 22,
+          "high_fahrenheit": 72,
+          "low_celsius": 13,
+          "low_fahrenheit": 55,
+          "precipitation_mm": 71,
+          "precipitation_inches": 2.8,
+          "description": "Warm with occasional thunderstorms"
         },
         "july": {
-          "high_celsius": 40,
-          "high_fahrenheit": 104,
-          "low_celsius": 26,
-          "low_fahrenheit": 79,
-          "precipitation_mm": 11,
-          "precipitation_inches": 0.4,
-          "description": "Peak summer heat, occasional monsoon storms"
-        },
-        "august": {
-          "high_celsius": 39,
-          "high_fahrenheit": 102,
-          "low_celsius": 26,
-          "low_fahrenheit": 78,
-          "precipitation_mm": 14,
-          "precipitation_inches": 0.5,
-          "description": "Very hot, highest chance of monsoon storms"
-        },
-        "september": {
-          "high_celsius": 35,
-          "high_fahrenheit": 95,
-          "low_celsius": 21,
-          "low_fahrenheit": 70,
-          "precipitation_mm": 7,
-          "precipitation_inches": 0.3,
-          "description": "Still hot but cooling down, mostly clear"
-        },
-        "october": {
-          "high_celsius": 28,
-          "high_fahrenheit": 82,
+          "high_celsius": 25,
+          "high_fahrenheit": 77,
           "low_celsius": 15,
           "low_fahrenheit": 59,
-          "precipitation_mm": 6,
-          "precipitation_inches": 0.2,
-          "description": "Pleasant temperatures, very little rain"
+          "precipitation_mm": 55,
+          "precipitation_inches": 2.2,
+          "description": "Warmest month, mix of sun and rain"
+        },
+        "august": {
+          "high_celsius": 24,
+          "high_fahrenheit": 75,
+          "low_celsius": 14,
+          "low_fahrenheit": 57,
+          "precipitation_mm": 58,
+          "precipitation_inches": 2.3,
+          "description": "Warm summer weather continues, scattered showers"
+        },
+        "september": {
+          "high_celsius": 19,
+          "high_fahrenheit": 66,
+          "low_celsius": 11,
+          "low_fahrenheit": 52,
+          "precipitation_mm": 45,
+          "precipitation_inches": 1.8,
+          "description": "Pleasant early autumn temperatures"
+        },
+        "october": {
+          "high_celsius": 14,
+          "high_fahrenheit": 57,
+          "low_celsius": 7,
+          "low_fahrenheit": 45,
+          "precipitation_mm": 37,
+          "precipitation_inches": 1.5,
+          "description": "Cooling temperatures, moderate rainfall"
         },
         "november": {
-          "high_celsius": 19,
-          "high_fahrenheit": 67,
-          "low_celsius": 8,
-          "low_fahrenheit": 47,
-          "precipitation_mm": 8,
-          "precipitation_inches": 0.3,
-          "description": "Cool and clear, occasional light rain"
+          "high_celsius": 8,
+          "high_fahrenheit": 46,
+          "low_celsius": 3,
+          "low_fahrenheit": 37,
+          "precipitation_mm": 44,
+          "precipitation_inches": 1.7,
+          "description": "Cool with increasing cloud cover"
         },
         "december": {
-          "high_celsius": 14,
-          "high_fahrenheit": 58,
-          "low_celsius": 4,
-          "low_fahrenheit": 39,
-          "precipitation_mm": 13,
-          "precipitation_inches": 0.5,
-          "description": "Cool winter weather, occasional rain"
+          "high_celsius": 4,
+          "high_fahrenheit": 39,
+          "low_celsius": 0,
+          "low_fahrenheit": 32,
+          "precipitation_mm": 55,
+          "precipitation_inches": 2.2,
+          "description": "Cold winter weather with mix of rain and snow"
         }
       },
       "summary": {
         "hottest_month": "july",
-        "coldest_month": "december",
-        "wettest_month": "february",
-        "driest_month": "june",
-        "annual_rainfall_mm": 111,
-        "annual_rainfall_inches": 4.2,
-        "climate_type": "Hot desert (BWh)",
-        "description": "Las Vegas has a hot desert climate with very hot summers and mild winters. Rainfall is sparse throughout the year, with occasional monsoon storms in late summer. The city experiences about 310 sunny days annually."
+        "coldest_month": "january",
+        "wettest_month": "june",
+        "driest_month": "february",
+        "annual_rainfall_mm": 568,
+        "annual_rainfall_inches": 22.4,
+        "climate_type": "Humid continental (Dfb)",
+        "description": "Berlin has a humid continental climate with warm summers and cold winters. The city experiences moderate rainfall throughout the year, with slightly higher precipitation in summer. All four seasons are distinct, with temperatures varying significantly between summer and winter months."
       }
-    }
+    },
+    "attractions": [
+      "Brandenburg Gate",
+      "East Side Gallery",
+      "Museum Island",
+      "Reichstag Building"
+    ]
   }
 }

@@ -14,28 +14,32 @@ def load_context(file_name):
 
 client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
-system_prompt = [{
-    "text": f"""
-    Today's date is {date.today()}. You are a travel assistant.
-    You will be given JSON data embedded in <context> tags about travel destinations and activities.
-    With that information, answer the user's question, embedded in <question> tags.
-    """
+# Get today's date for context, e.g. "Tuesday 03 December 2024"
+today = date.today().strftime("%A %d %B %Y")
+
+# Define the system prompt with instructions for handling the embedded data
+system = [{
+    "text": f"Today's date is {today}. You are a travel assistant."
+            f"Your are a friendly travel assistant. "
+            f"Keep your responses short, with a maximum of three sentences."
+            f"You will be given information about travel destinations and activities embedded in <data> tags."
+            f"Based on that information, answer the user's question, which is embedded in <question> tags."
 }]
 
-context_data = load_context('files/travel_info.json')
+context_data = load_context("files/travel_info.json")
 
 context = json.dumps(context_data)
 
-prompt = "Would it be a good time to visit Las Vegas this month?"
+prompt = "Would it be a good time to visit Berlin this month?"
 
-augmented_prompt = f"""
-<context>
-    {context}
-</context>
-<question>
-    {prompt}
-</question>
-"""
+augmented_prompt = (
+    f"<context>"
+    f"{context}"
+    f"</context>"
+    f"<question>"
+    f"{prompt}"
+    f"</question>"
+)
 
 messages = [{
     "role": "user", 
@@ -43,8 +47,8 @@ messages = [{
 }]
 
 response = client.converse(
-    modelId="anthropic.claude-3-haiku-20240307-v1:0",
-    system=system_prompt,
+    modelId="amazon.nova-micro-v1:0",
+    system=system,
     messages=messages
 )
 

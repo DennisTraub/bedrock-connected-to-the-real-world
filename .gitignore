@@ -3,3 +3,4 @@
 **/*.iml
 chroma.sqlite3
 **/*.bin
+**/vector_db/
